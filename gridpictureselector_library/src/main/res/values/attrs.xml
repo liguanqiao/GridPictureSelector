@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GridPictureSelectorRecyclerView">
+        <attr name="span_count" format="integer"/>
+        <attr name="max_item_count" format="integer"/>
+        <attr name="item_white_spacing" format="dimension|reference"/>
+        <attr name="item_width" format="dimension|reference"/>
+        <attr name="add_image" format="reference"/>
+        <attr name="delete_image" format="reference"/>
+    </declare-styleable>
+</resources>
