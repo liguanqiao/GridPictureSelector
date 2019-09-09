@@ -1,7 +1,8 @@
 GridPictureSelector
 ============
-![演示图](image/20190907_114937.gif)
-使用开源库 [PictureSelector v2.24](https://github.com/LuckSiege/PictureSelector) 封装个自用九宫格选择器,如有写的不好请多包涵!
+![演示图](image/20190907_114937.gif)<br>
+使用开源库 [PictureSelector v2.24](https://github.com/LuckSiege/PictureSelector) 封装个自用九宫格选择器,如有写的不好请多包涵!<br>
+注意:本库会带 PictureSelector v2.24 包,如你的项目有,去掉只使用本库引入即可<br>
 [![](https://jitpack.io/v/xbr1dge/GridPictureSelector.svg)](https://jitpack.io/#xbr1dge/GridPictureSelector)
 ### 集成方式
 方式一 compile引入
@@ -31,13 +32,12 @@ step 1.
  </repositories>
 ```
 step 2.
-
 ```
-<dependency>
-      <groupId>com.github.LuckSiege.PictureSelector</groupId>
-      <artifactId>picture_library</artifactId>
-      <version>v2.2.4</version> 
-</dependency>
+	<dependency>
+	    <groupId>com.github.xbr1dge</groupId>
+	    <artifactId>GridPictureSelector</artifactId>
+	    <version>${lastVersion}</version>
+	</dependency>
 ```
 ### 基本使用
 Activity使用
@@ -105,7 +105,7 @@ private GridPictureSelectorRecyclerView mRecyclerView;
 <!-- 删除按钮图片 -->
 <attr name="delete_image" format="reference"/>
 ```
-### 自定义事件(可选)
+### 自定义事件(可选,写了会覆盖默认方法)
 添加事件
 ```
 mRecyclerView.setOnAddPicClickListener(new OnAddPicClickListener() {
