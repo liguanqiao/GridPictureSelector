@@ -102,22 +102,7 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
      * 初始化控件
      */
     private void init(Context context){
-        int maxItemWidth = PhotoPickerUtil.getScreenWidth() / mSpanCount; //item宽度最大值
-        int minItemWidth = BaseAdapterUtil.dp2px(60);    //item宽度最小值
-        if (mItemWidth == 0) {
-            mItemWidth = maxItemWidth;
-        } else {
-            if(mItemWidth > maxItemWidth){
-                //设置大于屏幕
-                mItemWidth = maxItemWidth;
-            }else if(mItemWidth < minItemWidth) {
-                //设置小于最小值
-                mItemWidth = minItemWidth + mItemWhiteSpacing;
-            }else {
-                //默认
-                mItemWidth += mItemWhiteSpacing;
-            }
-        }
+
 
         setOverScrollMode(OVER_SCROLL_NEVER);
         mGridLayoutManager = new GridLayoutManager(context, mSpanCount);
@@ -135,17 +120,41 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
      */
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
+        //列数
         int spanCount = mSpanCount;
+        //当前item数量
         int itemCount = mAdapter.getItemCount();
+        //行数
+        int rowCount = BigDecimal.valueOf(itemCount).divide(BigDecimal.valueOf(spanCount),BigDecimal.ROUND_CEILING).intValue();
+        //当前设置的宽度
+        int width = resolveSize(0, widthSpec);
+        //item最小宽度
+        int minItemWidth = BaseAdapterUtil.dp2px(60);    //item宽度最小值
+        //item最大宽度
+        int maxItemWidth = width / mSpanCount;
+        //item最后宽度
+        int itemWidth;
+        if (mItemWidth != 0) {
+            if(mItemWidth > maxItemWidth){
+                //设置最大值
+                itemWidth = maxItemWidth;
+            }else if(mItemWidth < minItemWidth) {
+                //设置小于最小值
+                itemWidth = minItemWidth + mItemWhiteSpacing;
+            }else {
+                //默认
+                itemWidth =mItemWidth + mItemWhiteSpacing;
+            }
+        }else {
+            if(maxItemWidth < minItemWidth){
+                itemWidth = minItemWidth + mItemWhiteSpacing;
+            }else {
+                itemWidth = maxItemWidth;
+            }
+        }
 
-        int expectWidth = mItemWidth * spanCount;   //期望宽度
-        int rowCount = BigDecimal.valueOf(itemCount ).divide(BigDecimal.valueOf(spanCount),BigDecimal.ROUND_CEILING).intValue();
-        int expectHeight = mItemWidth * rowCount;   //期望高度
-
-        int width = resolveSize(expectWidth, widthSpec);
-        int height = resolveSize(expectHeight, heightSpec);
-        width = Math.min(width, expectWidth);
-        height = Math.min(height, expectHeight);
+        width = itemWidth * spanCount;
+        int height = itemWidth * rowCount;
 
         setMeasuredDimension(width, height);
     }
@@ -155,7 +164,7 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
         ItemTouchHelper helper = new ItemTouchHelper(helpCallback);
         helper.attachToRecyclerView(this);
 
-        mAdapter.enableDragItem(true);
+        mAdapter.enableDragItem(longPress);
     }
 
     public void setData(List<LocalMedia> data){
