@@ -49,6 +49,7 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
         initDefaultAttrs();
         initCustomAttrs(context,attrs);
         init(context);
+        System.out.println("mMaxItemCount : " + mMaxItemCount);
     }
 
     /**
@@ -112,6 +113,7 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
         mAdapter = new BaseItemAdapter();
         mAdapter.setAddImage(mAddImage);
         mAdapter.setDeleteImage(mDeleteImage);
+        mAdapter.setItemCount(mMaxItemCount);
         setAdapter(mAdapter);
     }
 
