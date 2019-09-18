@@ -16,4 +16,16 @@
         app:item_width="90dp"
         android:background="@color/black"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_open_drag"
+        android:text="open drag"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_close_drag"
+        android:text="close drag"/>
+
 </LinearLayout>

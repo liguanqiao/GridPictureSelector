@@ -97,6 +97,10 @@ public class BaseItemAdapter <K extends BaseViewHolder> extends RecyclerView.Ada
         return isCanSwipe;
     }
 
+    public void setIsCanDrag(boolean flag){
+        this.isCanDrag = flag;
+    }
+
     /**
      * 设置是否可以拖拽
      * @param longPress
@@ -204,6 +208,8 @@ public class BaseItemAdapter <K extends BaseViewHolder> extends RecyclerView.Ada
     @Override
     public void onBindViewHolder(@NonNull final K viewHolder, final int position) {
         //少于8张，显示继续添加的图标
+        System.out.println("--onBindViewHolder--");
+
         if (getItemViewType(position) == TYPE_ADD && isCanDrag) {
             viewHolder.getIvImg().setImageResource(mAddImage);
             viewHolder.getIvImg().setOnLongClickListener(mOnToggleViewLongClickListener);
@@ -235,6 +241,8 @@ public class BaseItemAdapter <K extends BaseViewHolder> extends RecyclerView.Ada
                         }
                     }
                 });
+            }else {
+                viewHolder.getLlDel().setVisibility(View.GONE);
             }
             LocalMedia media = mData.get(position);
 //            int mimeType = media.getMimeType();

@@ -115,6 +115,8 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
         mAdapter.setDeleteImage(mDeleteImage);
         mAdapter.setItemCount(mMaxItemCount);
         setAdapter(mAdapter);
+
+        enableDragItem(true);
     }
 
     /**
@@ -161,12 +163,25 @@ public class GridPictureSelectorRecyclerView extends RecyclerView {
         setMeasuredDimension(width, height);
     }
 
+    /**
+     * 设置设置拖动并开启
+     * @param longPress
+     */
     public void enableDragItem(boolean longPress){
         BaseItemTouchHelpCallback helpCallback = new BaseItemTouchHelpCallback(mAdapter);
         ItemTouchHelper helper = new ItemTouchHelper(helpCallback);
         helper.attachToRecyclerView(this);
 
         mAdapter.enableDragItem(longPress);
+    }
+
+    /**
+     * 设置是否开启拖动
+     * @param flag
+     */
+    public void setIsCanDragItem(boolean flag){
+        mAdapter.setIsCanDrag(flag);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void setData(List<LocalMedia> data){

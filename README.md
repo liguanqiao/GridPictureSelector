@@ -62,8 +62,8 @@ private GridPictureSelectorRecyclerView mRecyclerView;
 //
 //        mRecyclerView.addDataAll(LocalMediaUtil.create(path1,path2,path3,path4,path5));
 		
-		//写此行则开启拖动及添加操作,不写则普通的网格排列图片点击查看大图功能
-        mRecyclerView.enableDragItem(true);
+        //动态设置拖动的开启与关闭
+        mRecyclerView.setIsCanDragItem(false);
     }
 
 
